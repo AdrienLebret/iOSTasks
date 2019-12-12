@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+
 
 class AddItemViewController: UIViewController, UIPickerViewDataSource,
 
@@ -75,7 +77,36 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
     
     // Save button
     
+    @IBAction func saveButton(_ sender: UIButton) {
+        let reminder:ReminderEntityClass = ReminderEntityClass(cat: "categ", com: "", dea: Date(), rat: "rating", tit: "michel")
+        
+        createData(reminderEntity: reminder)
+        
+    }
     
+    func createData(reminderEntity:ReminderEntityClass){
+        guard let appDeleguate = UIApplication.shared.delegate as? AppDelegate else {return}
+        
+        let managedContext = appDeleguate.persistentContainer.viewContext
+        
+        let reminderE = NSEntityDescription.entity(forEntityName: "ReminderEntity", in: managedContext)
+        
+        let reminder = NSManagedObject(entity: reminderE!, insertInto: managedContext)
+        reminder.setValue(reminderEntity.title, forKey: "title")
+        reminder.setValue(reminderEntity.category, forKey: "category")
+        reminder.setValue(reminderEntity.comment, forKey: "comment")
+        reminder.setValue(reminderEntity.completed, forKey: "completed")
+        reminder.setValue(reminderEntity.deadline, forKey: "deadline")
+        reminder.setValue(reminderEntity.rating, forKey: "rating")
+        reminder.setValue(reminderEntity.triggerDateTime, forKey: "triggerDateTime")
+        reminder.setValue(reminderEntity.uuid, forKey: "uuid")
+        
+        do {
+            try managedContext.save()
+        } catch let error as NSError {
+            print("Error Save")
+        }
+    }
     
 
 }

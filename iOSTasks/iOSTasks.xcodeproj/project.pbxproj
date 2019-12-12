@@ -16,6 +16,7 @@
 		7A4E869B23A23D9F00CA3612 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4E869A23A23D9F00CA3612 /* Assets.xcassets */; };
 		7A4E869E23A23D9F00CA3612 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A4E869C23A23D9F00CA3612 /* LaunchScreen.storyboard */; };
 		7A4E86A623A2473300CA3612 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E86A523A2473300CA3612 /* AddItemViewController.swift */; };
+		7A4E86A823A2524700CA3612 /* ReminderEntityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		7A4E869D23A23D9F00CA3612 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7A4E869F23A23D9F00CA3612 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A4E86A523A2473300CA3612 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
+		7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEntityClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				7A4E869F23A23D9F00CA3612 /* Info.plist */,
 				7A4E869723A23D9E00CA3612 /* iOSTasks.xcdatamodeld */,
 				7A4E86A523A2473300CA3612 /* AddItemViewController.swift */,
+				7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */,
 			);
 			path = iOSTasks;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A4E86A823A2524700CA3612 /* ReminderEntityClass.swift in Sources */,
 				7A4E869923A23D9E00CA3612 /* iOSTasks.xcdatamodeld in Sources */,
 				7A4E869323A23D9E00CA3612 /* SecondViewController.swift in Sources */,
 				7A4E869123A23D9E00CA3612 /* FirstViewController.swift in Sources */,
