@@ -31,7 +31,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <segue destination="Hcb-8P-7X6" kind="showDetail" id="8Kr-mw-YXd"/>
+                                    <segue destination="Hcb-8P-7X6" kind="show" animates="NO" id="8Kr-mw-YXd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -44,7 +44,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Project" image="lock.shield.fill" catalog="system" id="acW-dT-cKf"/>
+                    <tabBarItem key="tabBarItem" title="Project" image="lock.fill" catalog="system" id="acW-dT-cKf"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
@@ -74,7 +74,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <segue destination="Hcb-8P-7X6" kind="showDetail" id="cYC-cS-YMM"/>
+                                    <segue destination="Hcb-8P-7X6" kind="show" id="cYC-cS-YMM"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -125,14 +125,14 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
-                                    <segue destination="Hcb-8P-7X6" kind="showDetail" animates="NO" id="pwu-Ir-CAG"/>
+                                    <segue destination="Hcb-8P-7X6" kind="show" animates="NO" id="pwu-Ir-CAG"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="I2b-ZH-Hud"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Other" image="gamecontroller.fill" catalog="system" id="7W9-Ap-7xl"/>
+                    <tabBarItem key="tabBarItem" title="Other" image="ellipsis" catalog="system" id="7W9-Ap-7xl"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jE1-S5-MHm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -141,7 +141,7 @@
         <!--AddItem-->
         <scene sceneID="BZR-iX-5Ov">
             <objects>
-                <viewController title="AddItem" id="Hcb-8P-7X6" customClass="AddItemViewController" customModule="iOSTasks" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="AddItem" modalPresentationStyle="fullScreen" id="Hcb-8P-7X6" customClass="AddItemViewController" customModule="iOSTasks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9H3-aL-NcK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -153,40 +153,33 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0LC-Hk-HvL">
-                                <rect key="frame" x="301" y="527" width="93" height="61"/>
+                                <rect key="frame" x="289" y="526" width="93" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <state key="normal" title="Cancel"/>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTZ-15-iLg">
-                                <rect key="frame" x="45" y="199" width="52" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deadline" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipO-J6-hpe">
-                                <rect key="frame" x="45" y="244" width="96" height="30"/>
+                                <rect key="frame" x="45" y="244" width="81" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Priority" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBd-Tf-6Na">
-                                <rect key="frame" x="45" y="308" width="76" height="30"/>
+                                <rect key="frame" x="45" y="308" width="65" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Comment" borderStyle="bezel" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w4c-Iz-ewA">
-                                <rect key="frame" x="45" y="365" width="349" height="119"/>
+                                <rect key="frame" x="33" y="362" width="349" height="119"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Cj-4y-2QA">
-                                <rect key="frame" x="145" y="192" width="249" height="44"/>
+                                <rect key="frame" x="133" y="181" width="249" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="dataSource" destination="Hcb-8P-7X6" id="Hwm-wt-REA"/>
@@ -198,7 +191,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             </pickerView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick a date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ECp-cY-U6A">
-                                <rect key="frame" x="151" y="246" width="242" height="34"/>
+                                <rect key="frame" x="136" y="240" width="242" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -212,12 +205,18 @@
                                     <action selector="saveButton:" destination="Hcb-8P-7X6" eventType="touchUpInside" id="Gph-Vq-FN2"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vTZ-15-iLg">
+                                <rect key="frame" x="45" y="190" width="44" height="26"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="t1U-Z7-oKM"/>
                     </view>
                     <navigationItem key="navigationItem" id="Rhg-HT-Hn6"/>
-                    <splitViewMasterSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="deadlineInputTF" destination="ECp-cY-U6A" id="Tp6-m2-nEA"/>
                         <outlet property="typePicker" destination="5Cj-4y-2QA" id="FkO-VE-nqa"/>
@@ -229,8 +228,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="gamecontroller.fill" catalog="system" width="64" height="40"/>
-        <image name="lock.shield.fill" catalog="system" width="64" height="60"/>
+        <image name="ellipsis" catalog="system" width="64" height="18"/>
+        <image name="lock.fill" catalog="system" width="64" height="64"/>
         <image name="person.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
