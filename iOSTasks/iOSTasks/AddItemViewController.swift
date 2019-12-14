@@ -50,6 +50,8 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addGradientToView(view: self.view)
+        
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
         datePicker?.addTarget(self, action: #selector(AddItemViewController.dateChanged(datePicker:)), for: .valueChanged)
@@ -60,6 +62,28 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
         
         view.addGestureRecognizer(tapGesture)
 
+    }
+    
+    
+    func addGradientToView(view: UIView)
+    {
+            //gradient layer
+            let gradientLayer = CAGradientLayer()
+        
+            //let colorOne = UIColor(red:0.00, green:0.00, blue:0.40, alpha:1.0)
+            
+            //define colors
+            gradientLayer.colors = [UIColor.cyan.cgColor, UIColor.blue.cgColor]
+            
+            //define locations of colors as NSNumbers in range from 0.0 to 1.0
+            //if locations not provided the colors will spread evenly
+            gradientLayer.locations = [0.0, 0.6, 0.8]
+            
+            //define frame
+            gradientLayer.frame = view.bounds
+            
+            //insert the gradient layer to the view layer
+            view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
     @objc func viewTapped(gesture: UITapGestureRecognizer){
