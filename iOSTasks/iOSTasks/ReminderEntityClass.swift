@@ -20,14 +20,15 @@ class ReminderEntityClass {
     var uuid:String
 
     init(cat:String, com:String, dea:Date, rat:String, tit:String) {
+        // Manual
         self.category = cat
         self.comment = com
         self.deadline = dea
         self.rating = rat
         self.title = tit
+        // Automatic
         self.triggerDateTime = Date() // to put in comment
         self.uuid = UUID().uuidString
-        self.triggerDateTime = Date()
         self.completed = false
     }
 }

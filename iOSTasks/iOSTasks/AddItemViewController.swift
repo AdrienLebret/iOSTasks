@@ -22,15 +22,31 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return typeCategory.count
+        if pickerView.tag == 1 {
+            return typeCategory.count
+        } else {
+            return priorityCategory.count
+        }
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return typeCategory[row]
+        if pickerView.tag == 1 {
+            return "\(typeCategory[row])"
+        } else {
+            return "\(priorityCategory[row])"
+        }
+        
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        typeChoosen = typeCategory[row]
+        
+        if pickerView.tag == 1 {
+            typeChoosen = typeCategory[row]
+        } else {
+            priorityChoosen = priorityCategory[row]
+        }
+        
     }
     
     let typeCategory = ["Project", "Personal", "Other"]
@@ -38,6 +54,11 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
     
     @IBOutlet weak var typePicker: UIPickerView!
     
+    let priorityCategory = ["High", "Normal", "Low"]
+    
+    var priorityChoosen: String = ""
+    
+    @IBOutlet weak var priorityPicker: UIPickerView!
     
     
     // Deadline
@@ -65,26 +86,7 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
     }
     
     
-    func addGradientToView(view: UIView)
-    {
-            //gradient layer
-            let gradientLayer = CAGradientLayer()
-        
-            //let colorOne = UIColor(red:0.00, green:0.00, blue:0.40, alpha:1.0)
-            
-            //define colors
-            gradientLayer.colors = [UIColor.cyan.cgColor, UIColor.blue.cgColor]
-            
-            //define locations of colors as NSNumbers in range from 0.0 to 1.0
-            //if locations not provided the colors will spread evenly
-            gradientLayer.locations = [0.0, 0.6, 0.8]
-            
-            //define frame
-            gradientLayer.frame = view.bounds
-            
-            //insert the gradient layer to the view layer
-            view.layer.insertSublayer(gradientLayer, at: 0)
-    }
+    
     
     @objc func viewTapped(gesture: UITapGestureRecognizer){
         view.endEditing(true)
@@ -98,11 +100,12 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
         //view.endEditing(true)
     }
     
+    @IBOutlet weak var titleR: UITextField!
     
     // Save button
     
     @IBAction func saveButton(_ sender: UIButton) {
-        let reminder:ReminderEntityClass = ReminderEntityClass(cat: "categ", com: "", dea: Date(), rat: "rating", tit: "michel")
+        let reminder:ReminderEntityClass = ReminderEntityClass(cat: "categ", com: "", dea: datePicker!.date, rat: "rating", tit: titleR.text!)
         
         createData(reminderEntity: reminder)
         
@@ -156,5 +159,26 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
         }
     }*/
     
-
+    // OTHER
+    
+    func addGradientToView(view: UIView)
+    {
+            //gradient layer
+            let gradientLayer = CAGradientLayer()
+        
+            //let colorOne = UIColor(red:0.00, green:0.00, blue:0.40, alpha:1.0)
+            
+            //define colors
+            gradientLayer.colors = [UIColor.cyan.cgColor, UIColor.blue.cgColor]
+            
+            //define locations of colors as NSNumbers in range from 0.0 to 1.0
+            //if locations not provided the colors will spread evenly
+            gradientLayer.locations = [0.0, 0.6, 0.8]
+            
+            //define frame
+            gradientLayer.frame = view.bounds
+            
+            //insert the gradient layer to the view layer
+            view.layer.insertSublayer(gradientLayer, at: 0)
+    }
 }
