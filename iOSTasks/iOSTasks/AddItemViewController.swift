@@ -110,8 +110,12 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
     
     func createData(reminderEntity:ReminderEntityClass){
 
-/*
-        let reminder = NSManagedObject(entity: reminderE!, insertInto: managedContext)
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let reminder = NSEntityDescription.insertNewObject(forEntityName: "ReminderEntity", into: context)
+        
         reminder.setValue(reminderEntity.title, forKey: "title")
         reminder.setValue(reminderEntity.category, forKey: "category")
         reminder.setValue(reminderEntity.comment, forKey: "comment")
@@ -120,9 +124,37 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
         reminder.setValue(reminderEntity.rating, forKey: "rating")
         reminder.setValue(reminderEntity.triggerDateTime, forKey: "triggerDateTime")
         reminder.setValue(reminderEntity.uuid, forKey: "uuid")
-*/
-    
+        
+        do {
+            try context.save()
+            print("Context SAVED")
+        } catch {
+            print("Context NOT SAVED")
+        }
     }
+    
+    
+    
+    
+    // test debug
+    /*@IBAction func cancel(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ReminderEntity")
+        
+        request.returnsObjectsAsFaults = false
+        
+        do {
+            let results = try context.fetch(request)
+            
+            if results.count > 0 {
+                print(results)
+            }
+        } catch  {
+            
+        }
+    }*/
     
 
 }
