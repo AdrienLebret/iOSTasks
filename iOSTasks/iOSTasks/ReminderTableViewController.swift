@@ -25,7 +25,9 @@ class ReminderTableViewController: UITableViewController {
         
         // Tableau de tâches pour l'exemple. Il faudra remplir ce tableau avec des tâches provenant
         // de notre base de données
-        objectsArray = [Objects(sectionName: "Aujourd'hui", sectionObjects: ["tâche 1","tâche 2","tâche 3","tâche 4","tâche 5"]), Objects(sectionName: "Demain", sectionObjects: ["tâche 6","tâche 7"]), Objects(sectionName: "7 prochains jours", sectionObjects: ["tâche 8","tâche 9","tâche 10","tâche 11","tâche 12"]), Objects(sectionName: "Après", sectionObjects: ["tâche 13",])]
+        objectsArray = [Objects(sectionName: "Aujourd'hui", sectionObjects: ["tâche 1","tâche 2","tâche 3","tâche 4","tâche 5"]), Objects(sectionName: "Demain", sectionObjects: ["tâche 6","tâche 7"]), Objects(sectionName: "7 prochains jours", sectionObjects: ["tâche 8","tâche 9","tâche 10","tâche 11","tâche 12"]), Objects(sectionName: "Après", sectionObjects: ["tâche 13"])]
+        
+        // Recherche Core Data
         
     }
 
@@ -37,13 +39,13 @@ class ReminderTableViewController: UITableViewController {
         return objectsArray[section].sectionObjects.count
     }
     
-    func ​tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifiantModuleCellule, for: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: identifiantModuleCellule) as! UITableViewCell
         cell.textLabel?.text = objectsArray[indexPath.section].sectionObjects[indexPath.row]
         //cell.detailTextLabel?.text = "Section \(indexPath.section)"
         return cell
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return objectsArray[section].sectionName
     }
