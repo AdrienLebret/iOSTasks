@@ -12,6 +12,7 @@ import CoreData
 class ReminderTableViewController: UITableViewController {
 
     var identifiantModuleCellule : String = "cellReminder"
+    var cellUUID:String = ""
     
     struct Objects {
         var sectionName : String!
@@ -71,5 +72,22 @@ class ReminderTableViewController: UITableViewController {
         return objectsArray[section].sectionName
     }
 
+    
+    
+    // Cell selection
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //print("You selected cell #\(indexPath)")
+        cellUUID = objectsArray[indexPath.section].sectionObjects[indexPath.row].uuid!
+        
+        performSegue(withIdentifier: "cellSelection", sender: indexPath)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is ModifyItemViewController{
+            let vc = segue.destination as? ModifyItemViewController
+            vc?.reminderUUID = cellUUID
+        }
+    }
 
 }

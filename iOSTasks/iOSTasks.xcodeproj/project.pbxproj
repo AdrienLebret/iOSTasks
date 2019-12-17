@@ -18,6 +18,7 @@
 		7A4E86A623A2473300CA3612 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E86A523A2473300CA3612 /* AddItemViewController.swift */; };
 		7A4E86A823A2524700CA3612 /* ReminderEntityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */; };
 		7A57AC7423A6458A00BFCDA3 /* ReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A57AC7323A6458A00BFCDA3 /* ReminderTableViewController.swift */; };
+		7A72F92223A8D75500890B0F /* ModifyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A72F92123A8D75500890B0F /* ModifyItemViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		7A4E86A523A2473300CA3612 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEntityClass.swift; sourceTree = "<group>"; };
 		7A57AC7323A6458A00BFCDA3 /* ReminderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableViewController.swift; sourceTree = "<group>"; };
+		7A72F92123A8D75500890B0F /* ModifyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				7A4E86A523A2473300CA3612 /* AddItemViewController.swift */,
 				7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */,
 				7A57AC7323A6458A00BFCDA3 /* ReminderTableViewController.swift */,
+				7A72F92123A8D75500890B0F /* ModifyItemViewController.swift */,
 			);
 			path = iOSTasks;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 				7A4E869923A23D9E00CA3612 /* iOSTasks.xcdatamodeld in Sources */,
 				7A4E869323A23D9E00CA3612 /* SecondViewController.swift in Sources */,
 				7A57AC7423A6458A00BFCDA3 /* ReminderTableViewController.swift in Sources */,
+				7A72F92223A8D75500890B0F /* ModifyItemViewController.swift in Sources */,
 				7A4E869123A23D9E00CA3612 /* FirstViewController.swift in Sources */,
 				7A4E868D23A23D9E00CA3612 /* AppDelegate.swift in Sources */,
 				7A4E868F23A23D9E00CA3612 /* SceneDelegate.swift in Sources */,
