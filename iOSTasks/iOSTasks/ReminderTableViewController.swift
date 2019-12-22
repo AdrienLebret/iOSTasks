@@ -53,8 +53,6 @@ class ReminderTableViewController: UITableViewController {
         requestF.returnsObjectsAsFaults = false
         
         do {
-
-            
             
             //========================
             // Date Filtering Results
@@ -80,7 +78,7 @@ class ReminderTableViewController: UITableViewController {
             // PAST
             
             let pastPredicate = NSPredicate(format: "deadline < %@", dateFrom as! NSDate)
-            requestP.predicate = pastPredicate
+            requestP.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [pastPredicate,categoryPredicate])
             
             let pastReminder = try context.fetch(requestP)
 
@@ -102,7 +100,7 @@ class ReminderTableViewController: UITableViewController {
             // FUTUR
             
             let futurPredicate = NSPredicate(format: "deadline > %@", dateTo as! NSDate)
-            requestF.predicate = futurPredicate
+            requestF.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [futurPredicate,categoryPredicate])
             
             let futurReminder = try context.fetch(requestF)
 

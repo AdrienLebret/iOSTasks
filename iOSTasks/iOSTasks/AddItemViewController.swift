@@ -11,6 +11,11 @@ import CoreData
 
 
 class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    
+    //=============
+    // PICKER VIEW
+    //=============
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -54,7 +59,9 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var priorityPicker: UIPickerView!
     
     
+    //==========
     // Deadline
+    //==========
     
     @IBOutlet weak var deadlineInputTF: UITextField!
     
