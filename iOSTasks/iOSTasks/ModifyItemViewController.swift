@@ -14,6 +14,9 @@ class ModifyItemViewController: UIViewController {
 
     public var reminderUUID:String = "" // reminder's ID
     
+    var titleReminderSelected:String = ""
+    var commentReminderSelected:String = ""
+    var uuidReminderSelected:String = ""
     
     @IBOutlet weak var labelTest: UILabel!
     
@@ -39,6 +42,9 @@ class ModifyItemViewController: UIViewController {
             for tempReminder in reminderTab  {
                 if tempReminder.uuid == reminderUUID{
                     reminderSelected = tempReminder
+                    titleReminderSelected = reminderSelected.title!
+                    commentReminderSelected = reminderSelected.comment!
+                    uuidReminderSelected = reminderSelected.uuid!
                     print("Reminder Selected : #\(reminderSelected.title)")
                 }
             }
@@ -58,11 +64,64 @@ class ModifyItemViewController: UIViewController {
     // NOTFICATION
     //=============
     
-    let center = UNUserNotificationCenter.current()
+    // user allowed to do some notification
     
-    //center
-  
     @IBAction func saveNotificationButton(_ sender: UIButton) {
+        
+        let center = UNUserNotificationCenter.current()
+        var this = self
+        center.getNotificationSettings{ settings in
+            guard settings.authorizationStatus == .authorized else {return}
+            
+            if settings.alertSetting == .enabled {
+                // schedule
+                
+                // title notif
+                let content = UNMutableNotificationContent()
+                content.title = this.titleReminderSelected
+                content.body = this.commentReminderSelected
+                
+                // date notif
+                var dateComponents = DateComponents()
+                dateComponents.calendar = Calendar.current
+                
+                dateComponents.weekday = 3
+                dateComponents.hour = 10
+                dateComponents.minute = 47
+            
+                print("Date")
+                print(Date())
+                
+                
+                print("Calendar")
+                print(Calendar.current)
+                
+                print("DateComponent")
+                print(dateComponents)
+                
+                // request
+                let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: false)
+                
+                let request = UNNotificationRequest(identifier: this.uuidReminderSelected, content: content, trigger: trigger)
+                
+                // notif
+                
+                center.add(request){ (error) in
+                    if error != nil {
+                        print("Error Notification")
+                    }
+                }
+                
+                // update ReminderEntity trigger date time
+                
+                // TO DO
+                
+            } else {
+                // insert "message d'erreur"
+                print("You didn't allow....")
+            }
+            
+        }
     }
     
     

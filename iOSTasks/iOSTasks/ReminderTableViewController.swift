@@ -22,6 +22,8 @@ class ReminderTableViewController: UITableViewController {
     var objectsArray = [Objects]()
     
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,16 +36,89 @@ class ReminderTableViewController: UITableViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ReminderEntity")
+        let requestP = NSFetchRequest<NSFetchRequestResult>(entityName: "ReminderEntity")
+        requestP.returnsObjectsAsFaults = false
         
-        request.returnsObjectsAsFaults = false
+        let requestT = NSFetchRequest<NSFetchRequestResult>(entityName: "ReminderEntity")
+        requestT.returnsObjectsAsFaults = false
+        
+        let requestF = NSFetchRequest<NSFetchRequestResult>(entityName: "ReminderEntity")
+        requestF.returnsObjectsAsFaults = false
         
         do {
-            let results = try context.fetch(request)
+
+            //========================
+            // Date Filtering Results
+            //========================
             
-            if results.count > 0 {
-                objectsArray = [Objects(sectionName: "Aujourd'hui", sectionObjects: results as! [ReminderEntity])]
-            }
+            // DATE
+            
+            let date = NSDate()
+            
+            // Get the current calendar with local time zone
+            var calendar = Calendar.current
+            calendar.timeZone = NSTimeZone.local
+
+            // Get today's beginning & end
+            let dateFrom = calendar.startOfDay(for: Date()) // eg. 2016-10-10 00:00:00
+            let dateTo = calendar.date(byAdding: .day, value: 1, to: dateFrom)
+            // Note: Times are printed in UTC. Depending on where you live it won't print 00:00:00 but it will work with UTC times which can be converted to local time
+            
+            // PAST
+            
+            let pastPredicate = NSPredicate(format: "deadline < %@", dateFrom as! NSDate)
+            requestP.predicate = pastPredicate
+            
+            let pastReminder = try context.fetch(requestP)
+            
+            print("===========")
+            print("PAST")
+            print("===========")
+            
+            print(pastReminder)
+            
+            // TODAY
+            
+            let todayPredicate = NSPredicate(format: "deadline == %@", date)
+            //requestT.predicate = todayPredicate
+            
+            // Set predicate as date being today's date
+            let fromPredicate = NSPredicate(format: "deadline>= %@", dateFrom as! NSDate)
+            let toPredicate = NSPredicate(format: "deadline < %@" , dateTo as! NSDate)
+            let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+            requestT.predicate = datePredicate
+            
+            let todayReminder = try context.fetch(requestT)
+            
+            print("===========")
+            print("TODAY")
+            print("===========")
+            print(todayReminder)
+            
+            // FUTUR
+            
+            let futurPredicate = NSPredicate(format: "deadline > %@", dateTo as! NSDate)
+            requestF.predicate = futurPredicate
+            
+            let futurReminder = try context.fetch(requestF)
+            
+            print("===========")
+            print("FUTUR")
+            print("===========")
+            print(futurReminder)
+       
+            //objectsArray = [Objects(sectionName: "Aujourd'hui", sectionObjects: results as! [ReminderEntity])]
+            
+            
+            //let todayReminder =
+            
+            
+            
+            
+            // Add results to array
+            
+            objectsArray = [Objects(sectionName: "Pasted", sectionObjects: pastReminder as! [ReminderEntity]),Objects(sectionName: "Today", sectionObjects: todayReminder as! [ReminderEntity]),Objects(sectionName: "After", sectionObjects: futurReminder as! [ReminderEntity])]
+            
         } catch  {
             
         }
@@ -73,8 +148,9 @@ class ReminderTableViewController: UITableViewController {
     }
 
     
-    
+    //================
     // Cell selection
+    //================
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("You selected cell #\(indexPath)")

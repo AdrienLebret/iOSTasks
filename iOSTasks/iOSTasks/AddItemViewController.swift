@@ -131,6 +131,7 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
         do {
             try context.save()
             print("Context SAVED")
+            print(reminder)
         } catch {
             print("Context NOT SAVED")
         }
