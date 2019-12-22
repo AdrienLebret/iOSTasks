@@ -10,13 +10,7 @@ import UIKit
 import CoreData
 
 
-class AddItemViewController: UIViewController, UIPickerViewDataSource,
-
-    // Picker View Type
-    // à dupliquer pour la priorité
-    
-    
-    UIPickerViewDelegate {
+class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -50,13 +44,12 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
     }
     
     let typeCategory = ["Project", "Personal", "Other"]
-    var typeChoosen: String = ""
+    var typeChoosen: String = "Project" // initial value
     
     @IBOutlet weak var typePicker: UIPickerView!
     
     let priorityCategory = ["High", "Normal", "Low"]
-    
-    var priorityChoosen: String = ""
+    var priorityChoosen: String = "High" // initial value
     
     @IBOutlet weak var priorityPicker: UIPickerView!
     
@@ -105,7 +98,7 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
     // Save button
     
     @IBAction func saveButton(_ sender: UIButton) {
-        let reminder:ReminderEntityClass = ReminderEntityClass(cat: "categ", com: "", dea: datePicker!.date, rat: "rating", tit: titleR.text!)
+        let reminder:ReminderEntityClass = ReminderEntityClass(cat: typeChoosen, com: "", dea: datePicker!.date, rat: priorityChoosen, tit: titleR.text!)
         
         createData(reminderEntity: reminder)
         
@@ -160,7 +153,7 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource,
         }
     }*/
     
-    // OTHER
+    // OTHER : the gradient background
     
     func addGradientToView(view: UIView)
     {

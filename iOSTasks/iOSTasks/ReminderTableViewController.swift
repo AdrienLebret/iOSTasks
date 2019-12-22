@@ -27,6 +27,13 @@ class ReminderTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Get current tab bar view controller
+        
+        let currentCategory = self.title! // name of the current Table View Controller
+        
+        print(currentCategory)
+        
+        
         // Tableau de tâches pour l'exemple. Il faudra remplir ce tableau avec des tâches provenant
         // de notre base de données
         /*objectsArray = [Objects(sectionName: "Aujourd'hui", sectionObjects: ["tâche 1","tâche 2","tâche 3","tâche 4","tâche 5"]), Objects(sectionName: "Demain", sectionObjects: ["tâche 6","tâche 7"]), Objects(sectionName: "7 prochains jours", sectionObjects: ["tâche 8","tâche 9","tâche 10","tâche 11","tâche 12"]), Objects(sectionName: "Après", sectionObjects: ["tâche 13"])]*/
@@ -47,9 +54,15 @@ class ReminderTableViewController: UITableViewController {
         
         do {
 
+            
+            
             //========================
             // Date Filtering Results
             //========================
+            
+            // Type
+            
+            let categoryPredicate = NSPredicate(format: "category == %@", currentCategory)
             
             // DATE
             
@@ -70,12 +83,7 @@ class ReminderTableViewController: UITableViewController {
             requestP.predicate = pastPredicate
             
             let pastReminder = try context.fetch(requestP)
-            
-            print("===========")
-            print("PAST")
-            print("===========")
-            
-            print(pastReminder)
+
             
             // TODAY
             
@@ -85,15 +93,11 @@ class ReminderTableViewController: UITableViewController {
             // Set predicate as date being today's date
             let fromPredicate = NSPredicate(format: "deadline>= %@", dateFrom as! NSDate)
             let toPredicate = NSPredicate(format: "deadline < %@" , dateTo as! NSDate)
-            let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate])
+            let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate, categoryPredicate])
             requestT.predicate = datePredicate
             
             let todayReminder = try context.fetch(requestT)
-            
-            print("===========")
-            print("TODAY")
-            print("===========")
-            print(todayReminder)
+
             
             // FUTUR
             
@@ -101,21 +105,13 @@ class ReminderTableViewController: UITableViewController {
             requestF.predicate = futurPredicate
             
             let futurReminder = try context.fetch(requestF)
-            
-            print("===========")
-            print("FUTUR")
-            print("===========")
-            print(futurReminder)
-       
-            //objectsArray = [Objects(sectionName: "Aujourd'hui", sectionObjects: results as! [ReminderEntity])]
-            
-            
-            //let todayReminder =
-            
-            
+
             
             
             // Add results to array
+            
+            //objectsArray = [Objects(sectionName: "Aujourd'hui", sectionObjects: results as! [ReminderEntity])]
+
             
             objectsArray = [Objects(sectionName: "Pasted", sectionObjects: pastReminder as! [ReminderEntity]),Objects(sectionName: "Today", sectionObjects: todayReminder as! [ReminderEntity]),Objects(sectionName: "After", sectionObjects: futurReminder as! [ReminderEntity])]
             
@@ -124,6 +120,10 @@ class ReminderTableViewController: UITableViewController {
         }
         
     }
+    
+    //====================
+    // Table view methods
+    //====================
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return objectsArray.count // count how many section we have
