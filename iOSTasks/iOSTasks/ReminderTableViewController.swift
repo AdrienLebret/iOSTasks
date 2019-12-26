@@ -21,11 +21,16 @@ class ReminderTableViewController: UITableViewController {
     
     var objectsArray = [Objects]()
     
-    
-    
+    var refresher: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refresher = UIRefreshControl()
+        refresher.attributedTitle = NSAttributedString(string : "Pull to refresh")
+        refresher.addTarget(self, action: #selector(ReminderTableViewController.populate), for: .valueChanged)
+        
+        tableView.addSubview(refresher)
         
         // Get current tab bar view controller
         
@@ -117,6 +122,15 @@ class ReminderTableViewController: UITableViewController {
             
         }
         
+    }
+    
+    //================
+    // Refresh method
+    //================
+    
+    @objc func populate() {
+        refresher.endRefreshing()
+        tableView.reloadData()
     }
     
     //====================

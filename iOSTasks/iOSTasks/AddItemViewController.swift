@@ -82,7 +82,14 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddItemViewController.viewTapped(gesture:)))
         
         view.addGestureRecognizer(tapGesture)
-
+        
+        // test validate save button
+        
+        addButtonR.isEnabled = false
+        
+        datePicker?.addTarget(self, action: #selector(setDisableButton), for: .valueChanged)
+        
+        titleR?.addTarget(self, action: #selector(setDisableButton), for: .editingChanged)
     }
     
     
@@ -104,6 +111,7 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     @IBOutlet weak var commentR: UITextField!
     @IBOutlet weak var errorTitleLabelR: UILabel!
     @IBOutlet weak var errorDateLabelR: UILabel!
+    @IBOutlet weak var addButtonR: UIButton!
     
     
     
@@ -116,12 +124,26 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         // validate the user's data
         
         if validateData()!{
+            
+            // Normally it's valid when the user press the button
+
+            
             let reminder:ReminderEntityClass = ReminderEntityClass(cat: typeChoosen, com: "Commentaire", dea: datePicker!.date, rat: priorityChoosen, tit: titleR.text!)
+            
             createData(reminderEntity: reminder)
-            //print("ça marche !")
+            
+            createValidateAlert(title: "New task added", message: titleR!.text!)
+            
+            self.show(tabBarController!, sender: self)
         }
-        
-        
+    }
+    
+    @objc func setDisableButton(){
+        if validateData()!{
+            addButtonR.isEnabled = true
+        } else {
+            addButtonR.isEnabled = false
+        }
     }
 
     func validateData()->Bool?{
@@ -149,9 +171,18 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             errorDateLabelR.text = "Enter today's date or a future date"
             return false
         }
-        
-        
     }
+    
+    func createValidateAlert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
     func createData(reminderEntity:ReminderEntityClass){
 

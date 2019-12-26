@@ -64,6 +64,8 @@ class ModifyItemViewController: UIViewController {
     // NOTFICATION
     //=============
     
+//     A LIRE : https://www.raywenderlich.com/8164-push-notifications-tutorial-getting-started
+    
     // user allowed to do some notification
     
     @IBAction func saveNotificationButton(_ sender: UIButton) {
