@@ -134,8 +134,9 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             
             createValidateAlert(title: "New task added", message: titleR!.text!)
             
-            self.show(tabBarController!, sender: self)
+            //self.show(tabBarController!, sender: self)
         }
+        
     }
     
     @objc func setDisableButton(){
@@ -178,6 +179,7 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
             alert.dismiss(animated: true, completion: nil)
+            //self.navigationController?.pushViewController(self, animated: true)
         }))
         
         self.present(alert, animated: true, completion: nil)

@@ -11,6 +11,7 @@
         <scene sceneID="yl2-sM-qoP">
             <objects>
                 <tabBarController modalPresentationStyle="fullScreen" id="49e-Tb-3d3" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Fyp-uE-7sc"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -80,6 +81,7 @@
                                 <state key="normal" title="Save"/>
                                 <connections>
                                     <action selector="saveButton:" destination="Hcb-8P-7X6" eventType="touchUpInside" id="Gph-Vq-FN2"/>
+                                    <segue destination="49e-Tb-3d3" kind="show" id="SPX-yh-Hxn"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="top" text="Comment" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="w4c-Iz-ewA">
@@ -238,7 +240,7 @@
             <objects>
                 <tableViewController title="Personal" modalPresentationStyle="fullScreen" id="ZXa-7F-6bn" customClass="ReminderTableViewController" customModule="iOSTasks" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YF4-oX-fM2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -306,7 +308,7 @@
         <image name="plus" catalog="system" width="64" height="56"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bSL-5z-TCL"/>
+        <segue reference="NEm-Wz-IXy"/>
         <segue reference="3Pp-AM-M5z"/>
     </inferredMetricsTieBreakers>
 </document>

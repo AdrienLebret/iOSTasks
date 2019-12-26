@@ -127,10 +127,19 @@ class ReminderTableViewController: UITableViewController {
     //================
     // Refresh method
     //================
+
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
     @objc func populate() {
         refresher.endRefreshing()
-        tableView.reloadData()
+        // Solution 1
+        /*DispatchQueue.main.async{
+            self.tableView.reloadData()
+        }*/
+   
+        print("REFRESH DONE")
     }
     
     //====================
