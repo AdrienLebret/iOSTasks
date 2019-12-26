@@ -89,7 +89,7 @@ class ReminderTableViewController: UITableViewController {
             //requestT.predicate = todayPredicate
             
             // Set predicate as date being today's date
-            let fromPredicate = NSPredicate(format: "deadline>= %@", dateFrom as! NSDate)
+            let fromPredicate = NSPredicate(format: "deadline >= %@", dateFrom as! NSDate)
             let toPredicate = NSPredicate(format: "deadline < %@" , dateTo as! NSDate)
             let datePredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromPredicate, toPredicate, categoryPredicate])
             requestT.predicate = datePredicate

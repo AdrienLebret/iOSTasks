@@ -101,13 +101,55 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @IBOutlet weak var titleR: UITextField!
+    @IBOutlet weak var commentR: UITextField!
+    @IBOutlet weak var errorTitleLabelR: UILabel!
+    @IBOutlet weak var errorDateLabelR: UILabel!
     
-    // Save button
+    
+    
+    //===============================
+    // SAVE BUTTON + CREATE REMINDER
+    //===============================
     
     @IBAction func saveButton(_ sender: UIButton) {
-        let reminder:ReminderEntityClass = ReminderEntityClass(cat: typeChoosen, com: "", dea: datePicker!.date, rat: priorityChoosen, tit: titleR.text!)
+
+        // validate the user's data
         
-        createData(reminderEntity: reminder)
+        if validateData()!{
+            let reminder:ReminderEntityClass = ReminderEntityClass(cat: typeChoosen, com: "Commentaire", dea: datePicker!.date, rat: priorityChoosen, tit: titleR.text!)
+            createData(reminderEntity: reminder)
+            //print("ça marche !")
+        }
+        
+        
+    }
+
+    func validateData()->Bool?{
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        // Get today's beginning & end
+        let dateFrom = calendar.startOfDay(for: Date()) // eg. 2016-10-10 00:00:00
+        
+        //print(dateFrom) // C'est la date de la veille qui est affichée à 23h00 
+        
+        if ((titleR.text == "Task's name" || titleR.text!.count == 0) && datePicker!.date < dateFrom){ // everything is false
+            errorTitleLabelR.text = "Enter a task's name"
+            errorDateLabelR.text = "Enter today's date or a future date"
+            return false
+        } else if (titleR.text == "Task's name" || titleR.text!.count == 0){ // date is good but title is false
+            errorTitleLabelR.text = "Enter a task's name"
+            errorDateLabelR.text = ""
+            return false
+        } else if ((titleR.text != "Task's name" && titleR.text!.count > 0) && datePicker!.date >= dateFrom){ // everything is good
+            errorTitleLabelR.text = ""
+            errorDateLabelR.text = ""
+            return true
+        } else { // everything is false - title is good but date is false
+            errorTitleLabelR.text = ""
+            errorDateLabelR.text = "Enter today's date or a future date"
+            return false
+        }
+        
         
     }
     
@@ -160,7 +202,9 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
     }*/
     
+    //=================================
     // OTHER : the gradient background
+    //=================================
     
     func addGradientToView(view: UIView)
     {
