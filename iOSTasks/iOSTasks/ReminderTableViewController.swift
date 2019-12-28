@@ -158,9 +158,25 @@ class ReminderTableViewController: UITableViewController {
         var cell = tableView.dequeueReusableCell(withIdentifier: identifiantModuleCellule) as! UITableViewCell
         //cell.textLabel?.text = objectsArray[indexPath.section].sectionObjects[indexPath.row]
         
-        cell.textLabel?.text = objectsArray[indexPath.section].sectionObjects[indexPath.row].title
+        // cell.textLabel?.text = objectsArray[indexPath.section].sectionObjects[indexPath.row].title
         
-        //cell.detailTextLabel?.text = "Section \(indexPath.section)"
+        // Let use the rating - priority of our reminder
+        
+        var titreR = objectsArray[indexPath.section].sectionObjects[indexPath.row].title
+        
+        var ratingR = objectsArray[indexPath.section].sectionObjects[indexPath.row].rating
+        
+        switch ratingR {
+        case "Low":
+            cell.textLabel?.text = titreR! + " ↘️"
+        case "Normal":
+            cell.textLabel?.text = titreR! + " ➡️"
+        case "High":
+            cell.textLabel?.text = titreR! + " ↗️"
+        default:
+            cell.textLabel?.text = titreR
+        }
+        
         return cell
     }
 
