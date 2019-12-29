@@ -10,7 +10,36 @@ import UIKit
 import CoreData
 import UserNotifications
 
-class ModifyItemViewController: UIViewController {
+class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView.tag == 1 {
+            return typeCategory.count
+        } else{
+            return priorityCategory.count
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView.tag == 1 {
+            return "\(typeCategory[row])"
+        } else{
+            return "\(priorityCategory[row])"
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView.tag == 1 {
+            typeChoosen = typeCategory[row]
+        } else{
+            priorityChoosen = priorityCategory[row]
+        }
+    }
+   
+    
 
     public var reminderUUID:String = "" // reminder's ID
     
@@ -55,10 +84,66 @@ class ModifyItemViewController: UIViewController {
         
     }
     
+    //=================
+    // MODIFY REMINDER
+    //=================
+    
+    
+    // initialize the data in accordance with the reminder that the user wishes to modify
+    @IBOutlet weak var titleR: UITextField!
+    
+    @IBOutlet weak var typerPicker: UIPickerView!
+    @IBOutlet weak var priorityPicker: UIPickerView!
+    
+    
+    let typeCategory = ["Project", "Personal", "Other"]
+    var typeChoosen: String = "Project" // initial value
+    
+    let priorityCategory = ["High", "Normal", "Low"]
+    var priorityChoosen: String = "High" // initial value
+    
 
     
-    
-    
+    // SAVE THE MODIFICATION OF THE USER
+    @IBAction func saveButton(_ sender: UIButton) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ReminderEntity")
+
+        request.returnsObjectsAsFaults = false
+        
+        //var reminderSelected:ReminderEntity
+        
+        do {
+           let results = try context.fetch(request)
+           
+           if results.count > 0 {
+            
+            //var reminderTab = results as! [ReminderEntity]
+            
+            for tempReminder in results as! [ReminderEntity]  {
+                if tempReminder.uuid == reminderUUID{
+                    tempReminder.setValue(titleR.text!, forKey: "title")
+                    tempReminder.setValue(typeChoosen, forKey: "category")
+                    tempReminder.setValue(priorityChoosen, forKey: "rating")
+                    do {
+                        try context.save()
+                        print("Context MODIFIED")
+                        print(tempReminder)
+                    } catch {
+                        print("Context NOT SAVED")
+                    }
+                }
+            }
+           }
+        } catch  {
+           
+        }
+        
+        
+        
+    }
     
     //=============
     // NOTFICATION
