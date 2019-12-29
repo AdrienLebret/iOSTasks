@@ -11,36 +11,7 @@ import CoreData
 import UserNotifications
 
 class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
     
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if pickerView.tag == 1 {
-            return typeCategory.count
-        } else{
-            return priorityCategory.count
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if pickerView.tag == 1 {
-            return "\(typeCategory[row])"
-        } else{
-            return "\(priorityCategory[row])"
-        }
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if pickerView.tag == 1 {
-            typeChoosen = typeCategory[row]
-        } else{
-            priorityChoosen = priorityCategory[row]
-        }
-    }
-   
-    
-
     public var reminderUUID:String = "" // reminder's ID
     
     var titleReminderSelected:String = ""
@@ -52,6 +23,19 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // date picker initialate
+        
+        datePicker = UIDatePicker()
+        datePicker?.datePickerMode = .date
+        datePicker?.addTarget(self, action: #selector(AddItemViewController.dateChanged(datePicker:)), for: .valueChanged)
+        
+        deadlineInputTF.inputView = datePicker
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddItemViewController.viewTapped(gesture:)))
+        
+        view.addGestureRecognizer(tapGesture)
+        
+        // Context initialisation
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -92,6 +76,8 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
     // initialize the data in accordance with the reminder that the user wishes to modify
     @IBOutlet weak var titleR: UITextField!
     
+    // PICKER VIEWS
+    
     @IBOutlet weak var typerPicker: UIPickerView!
     @IBOutlet weak var priorityPicker: UIPickerView!
     
@@ -102,7 +88,52 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
     let priorityCategory = ["High", "Normal", "Low"]
     var priorityChoosen: String = "High" // initial value
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+         return 1
+     }
+     
+     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+         if pickerView.tag == 1 {
+             return typeCategory.count
+         } else{
+             return priorityCategory.count
+         }
+     }
+     
+     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+         if pickerView.tag == 1 {
+             return "\(typeCategory[row])"
+         } else{
+             return "\(priorityCategory[row])"
+         }
+     }
+     
+     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+         if pickerView.tag == 1 {
+             typeChoosen = typeCategory[row]
+         } else{
+             priorityChoosen = priorityCategory[row]
+         }
+     }
+    
 
+    // DATE PICKER
+    
+    @IBOutlet weak var deadlineInputTF: UITextField!
+    private var datePicker: UIDatePicker?
+    
+    @objc func viewTapped(gesture: UITapGestureRecognizer){
+        view.endEditing(true)
+    }
+    
+    @objc func dateChanged(datePicker: UIDatePicker){
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        deadlineInputTF.text = dateFormatter.string(from: datePicker.date)
+        //view.endEditing(true)
+    }
+    
     
     // SAVE THE MODIFICATION OF THE USER
     @IBAction func saveButton(_ sender: UIButton) {
@@ -127,6 +158,7 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
                     tempReminder.setValue(titleR.text!, forKey: "title")
                     tempReminder.setValue(typeChoosen, forKey: "category")
                     tempReminder.setValue(priorityChoosen, forKey: "rating")
+                    tempReminder.setValue(datePicker!.date, forKey: "deadline")
                     do {
                         try context.save()
                         print("Context MODIFIED")

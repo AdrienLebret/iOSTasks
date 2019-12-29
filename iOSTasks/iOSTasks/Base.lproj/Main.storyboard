@@ -253,12 +253,26 @@
                                     <outlet property="delegate" destination="Qfe-QJ-EaJ" id="uQl-Yf-SsH"/>
                                 </connections>
                             </pickerView>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Pick a date" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DhS-fV-fc1">
+                                <rect key="frame" x="164" y="336" width="214" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Deadline:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5Y-pk-s58">
+                                <rect key="frame" x="46" y="336" width="89" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="bEN-IH-ozc"/>
                     </view>
                     <navigationItem key="navigationItem" id="5hd-mT-l2D"/>
                     <connections>
+                        <outlet property="deadlineInputTF" destination="DhS-fV-fc1" id="s2W-8G-rlP"/>
                         <outlet property="labelTest" destination="E1h-xf-HlD" id="N20-Ct-qVb"/>
                         <outlet property="priorityPicker" destination="kjG-M1-nb7" id="bo0-YW-BSm"/>
                         <outlet property="titleR" destination="fCe-Pu-ftP" id="6FB-Qu-fPC"/>
@@ -306,7 +320,7 @@
             <objects>
                 <tableViewController title="Personal" modalPresentationStyle="fullScreen" id="ZXa-7F-6bn" customClass="ReminderTableViewController" customModule="iOSTasks" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="YF4-oX-fM2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -338,7 +352,7 @@
             <objects>
                 <tableViewController title="Project" modalPresentationStyle="fullScreen" id="H7w-QQ-goo" customClass="ReminderTableViewController" customModule="iOSTasks" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="n0V-ho-DCq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
