@@ -79,6 +79,12 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         
         deadlineInputTF.inputView = datePicker
         
+        //initialize date picker
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        deadlineInputTF.text = dateFormatter.string(from: datePicker!.date)
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddItemViewController.viewTapped(gesture:)))
         
         view.addGestureRecognizer(tapGesture)

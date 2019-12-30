@@ -22,8 +22,8 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // date picker initialate
+       
+        // date picker initialization
         
         datePicker = UIDatePicker()
         datePicker?.datePickerMode = .date
@@ -34,8 +34,7 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(AddItemViewController.viewTapped(gesture:)))
         
         view.addGestureRecognizer(tapGesture)
-        
-        // Context initialisation
+        // Context initialization
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
@@ -59,12 +58,56 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
                     commentReminderSelected = reminderSelected.comment!
                     uuidReminderSelected = reminderSelected.uuid!
                     print("Reminder Selected : #\(reminderSelected.title)")
+                    
+                    // initialize type picker view
+                    titleR.text = titleReminderSelected
+                    
+                    // initialize title tect field
+                    switch reminderSelected.category! {
+                    case "Project":
+                        typerPicker.selectRow(0, inComponent: 0, animated: true)
+                        typeChoosen = "Project"
+                    case "Personal":
+                        typerPicker.selectRow(1, inComponent: 0, animated: true)
+                        typeChoosen = "Personal"
+                    case "Other":
+                        typerPicker.selectRow(2, inComponent: 0, animated: true)
+                        typeChoosen = "Other"
+                    default:
+                        typerPicker.selectRow(0, inComponent: 0, animated: true)
+                    }
+                    
+                    // initialize priority picker view
+                    switch reminderSelected.rating! {
+                    case "High":
+                        priorityPicker.selectRow(0, inComponent: 0, animated: true)
+                        priorityChoosen = "High"
+                    case "Normal":
+                        priorityPicker.selectRow(1, inComponent: 0, animated: true)
+                        priorityChoosen = "Normal"
+                    case "Low":
+                        priorityPicker.selectRow(2, inComponent: 0, animated: true)
+                        priorityChoosen = "Low"
+                    default:
+                        priorityPicker.selectRow(0, inComponent: 0, animated: true)
+                        priorityChoosen = "High"
+                    }
+                    
+                    //initialize date picker
+                    datePicker?.date = reminderSelected.deadline!
+                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "dd/MM/yyyy"
+                    deadlineInputTF.text = dateFormatter.string(from: datePicker!.date)
+                    
                 }
             }
            }
         } catch  {
            
         }
+
+        
         
     }
     
@@ -272,7 +315,11 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
                     
                     context.delete(reminderSelected)
                     print("Reminder Deleted : #\(reminderSelected.title)")
-                    
+                    do {
+                        try context.save()
+                    } catch {
+                        print("Context NOT SAVED")
+                    }
                 }
             }
            }
