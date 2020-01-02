@@ -177,6 +177,14 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
         //view.endEditing(true)
     }
     
+    // ERROR MESSAGES
+    
+    @IBOutlet weak var modifyButtonR: UIButton!
+    @IBOutlet weak var errorTitleLabelR: UILabel!
+    @IBOutlet weak var errorDateLabelR: UILabel!
+    
+    
+    
     
     // SAVE THE MODIFICATION OF THE USER
     @IBAction func saveButton(_ sender: UIButton) {
@@ -227,7 +235,7 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
 //     A LIRE : https://www.raywenderlich.com/8164-push-notifications-tutorial-getting-started
     
     // user allowed to do some notification
-    
+    /*
     @IBAction func saveNotificationButton(_ sender: UIButton) {
         
         let center = UNUserNotificationCenter.current()
@@ -285,7 +293,7 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
             
         }
     }
-    
+    */
     
     
     

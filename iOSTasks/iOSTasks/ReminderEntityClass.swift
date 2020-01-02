@@ -27,7 +27,7 @@ class ReminderEntityClass {
         self.rating = rat
         self.title = tit
         // Automatic
-        self.triggerDateTime = Date() // to put in comment
+        self.triggerDateTime = dea // to put in comment
         self.uuid = UUID().uuidString
         self.completed = false
     }

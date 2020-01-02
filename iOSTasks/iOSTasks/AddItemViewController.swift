@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-
+import UserNotifications
 
 class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -137,8 +137,9 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             let reminder:ReminderEntityClass = ReminderEntityClass(cat: typeChoosen, com: "Commentaire", dea: datePicker!.date, rat: priorityChoosen, tit: titleR.text!)
             
             createData(reminderEntity: reminder)
+            createNotification(reminderEntity: reminder)
             
-            createValidateAlert(title: "New task added", message: titleR!.text!)
+            //createValidateAlert(title: "New task added", message: titleR!.text!)
             
             //self.show(tabBarController!, sender: self)
         }
@@ -194,7 +195,6 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     
     func createData(reminderEntity:ReminderEntityClass){
 
-        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let context = appDelegate.persistentContainer.viewContext
         
@@ -218,7 +218,79 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
         }
     }
     
+    //=============
+    // NOTFICATION
+    //=============
     
+    func createNotification(reminderEntity:ReminderEntityClass) {
+        let center = UNUserNotificationCenter.current()
+        var this = self
+        center.getNotificationSettings{ settings in
+            guard settings.authorizationStatus == .authorized else {return}
+            
+            if settings.alertSetting == .enabled {
+                // schedule
+                
+                // title notif
+                let content = UNMutableNotificationContent()
+                content.title = reminderEntity.title
+                content.body = reminderEntity.comment
+                
+                // date notif
+                /*var dateComponents = DateComponents()
+                dateComponents.calendar = Calendar.current
+                
+                dateComponents.weekday = 3
+                dateComponents.hour = 10
+                dateComponents.minute = 47*/
+                               
+                // Take the deadline
+                let date = reminderEntity.deadline
+                
+                //print("Deadline :")
+                //print(date)
+            
+                // Create calendar object
+                var calendar = Calendar.current
+
+                // Get components using current Local & Timezone ***
+                print(calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date))
+
+                // *** define calendar components to use as well Timezone to UTC ***
+                calendar.timeZone = TimeZone(identifier: "UTC")!
+                
+                
+                var components = calendar.dateComponents([.year, .month, .day], from: date)
+                components.hour = 9
+                components.minute = 0
+                print("The notification will take place  : \(components)")
+                
+                // request
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                
+                print("Notification created")
+                
+                let request = UNNotificationRequest(identifier: reminderEntity.uuid, content: content, trigger: trigger)
+                
+                // notif
+                
+                center.add(request){ (error) in
+                    if error != nil {
+                        print("Error Notification")
+                    }
+                }
+                
+                // update ReminderEntity trigger date time
+                
+                // TO DO
+                
+            } else {
+                // insert "message d'erreur"
+                print("You didn't allow....")
+            }
+            
+        }
+    }
     
     
     // test debug
