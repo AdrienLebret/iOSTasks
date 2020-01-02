@@ -100,14 +100,17 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
                     dateFormatter.dateFormat = "dd/MM/yyyy"
                     deadlineInputTF.text = dateFormatter.string(from: datePicker!.date)
                     
+                    modifyButtonR.isEnabled = true
+                    
+                    //datePicker?.addTarget(self, action: #selector(self.setDisableButton(reminderSelected)), for: .valueChanged)
+                    
+                    //titleR?.addTarget(self, action: #selector(setDisableButton(reminderSelected)), for: .editingChanged)
                 }
             }
            }
         } catch  {
            
         }
-
-        
         
     }
     
@@ -183,8 +186,38 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet weak var errorTitleLabelR: UILabel!
     @IBOutlet weak var errorDateLabelR: UILabel!
     
+    func validateData(_ reminderEntity:ReminderEntity)->Bool{
+        var calendar = Calendar.current
+        calendar.timeZone = NSTimeZone.local
+        let dateFrom = calendar.startOfDay(for: reminderEntity.deadline!)
+        
+        if ((titleR.text == "Task's name" || titleR.text!.count == 0) && datePicker!.date < dateFrom){ // everything is false
+            errorTitleLabelR.text = "Enter a task's name"
+            errorDateLabelR.text = "Don't enter a date before the actual deadline"
+            return false
+        } else if (titleR.text == "Task's name" || titleR.text!.count == 0){ // date is good but title is false
+            errorTitleLabelR.text = "Enter a task's name"
+            errorDateLabelR.text = ""
+            return false
+        } else if ((titleR.text != "Task's name" && titleR.text!.count > 0) && datePicker!.date >= dateFrom){ // everything is good
+            errorTitleLabelR.text = ""
+            errorDateLabelR.text = ""
+            return true
+        } else { // everything is false - title is good but date is false
+            errorTitleLabelR.text = ""
+            errorDateLabelR.text = "Don't enter a date before the actual deadline"
+            return false
+        }
+    }
     
-    
+    @objc func setDisableButton(_ reminderEntity:ReminderEntity){
+        if validateData(reminderEntity){
+            modifyButtonR.isEnabled = true
+        } else {
+            modifyButtonR.isEnabled = false
+        }
+    }
+
     
     // SAVE THE MODIFICATION OF THE USER
     @IBAction func saveButton(_ sender: UIButton) {
@@ -206,17 +239,22 @@ class ModifyItemViewController: UIViewController, UIPickerViewDataSource, UIPick
             
             for tempReminder in results as! [ReminderEntity]  {
                 if tempReminder.uuid == reminderUUID{
-                    tempReminder.setValue(titleR.text!, forKey: "title")
-                    tempReminder.setValue(typeChoosen, forKey: "category")
-                    tempReminder.setValue(priorityChoosen, forKey: "rating")
-                    tempReminder.setValue(datePicker!.date, forKey: "deadline")
-                    do {
-                        try context.save()
-                        print("Context MODIFIED")
-                        print(tempReminder)
-                    } catch {
-                        print("Context NOT SAVED")
+                    
+                    if validateData(tempReminder){
+                        tempReminder.setValue(titleR.text!, forKey: "title")
+                        tempReminder.setValue(typeChoosen, forKey: "category")
+                        tempReminder.setValue(priorityChoosen, forKey: "rating")
+                        tempReminder.setValue(datePicker!.date, forKey: "deadline")
+                        do {
+                            try context.save()
+                            print("Context MODIFIED")
+                            print(tempReminder)
+                        } catch {
+                            print("Context NOT SAVED")
+                        }
                     }
+                    
+                    
                 }
             }
            }
