@@ -14,6 +14,8 @@ import CryptoKit
 class CheckPasswordViewController: UIViewController {
     
     @IBOutlet weak var passwordEditTF: UITextField!
+    @IBOutlet weak var errorPassword: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,7 +31,6 @@ class CheckPasswordViewController: UIViewController {
             // Password Not Created
             print("HELLO")
             //performSegue(withIdentifier: "showCreatedPassword", sender: self)
-            
         }
         
     }
@@ -47,7 +48,7 @@ class CheckPasswordViewController: UIViewController {
         
         guard let data = retrivedData as? Data else {print("ERROR BITCH");return}
         
-        var pw = String(data: data, encoding: String.Encoding.utf8)
+        let pw = String(data: data, encoding: String.Encoding.utf8)
         
         print(pw)
         
@@ -62,12 +63,24 @@ class CheckPasswordViewController: UIViewController {
         print(valueData)
         print(String(valueData) == pw)
         
-        if String(valueData) == pw {
-//           connection
-            
+        if String(valueData) == pw {            
             performSegue(withIdentifier: "connection", sender: nil)
+        } else {
+            errorPassword.text! = "Wrong password"
+            createValidateAlert(title: "Wrong password", message: "Try a new password")
         }
         
+    }
+    
+    func createValidateAlert(title:String, message:String){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+            //self.navigationController?.pushViewController(self, animated: true)
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
 

@@ -280,11 +280,7 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
                         print("Error Notification")
                     }
                 }
-                
-                // update ReminderEntity trigger date time
-                
-                // TO DO
-                
+
             } else {
                 // insert "message d'erreur"
                 print("You didn't allow....")

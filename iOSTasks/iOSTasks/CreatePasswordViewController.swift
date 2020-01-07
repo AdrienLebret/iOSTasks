@@ -14,6 +14,7 @@ class CreatePasswordViewController: UIViewController {
 
     
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var errorLabel2: UILabel!
     @IBOutlet weak var passwordOneTF: UITextField!
     @IBOutlet weak var passwordTwoTF: UITextField!
     
@@ -23,11 +24,12 @@ class CreatePasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createButton.isEnabled = false
+        
         passwordOneTF.isSecureTextEntry = true
         passwordTwoTF.isSecureTextEntry = true
-        //titleR?.addTarget(self, action: #selector(setDisableButton), for: .editingChanged)
-        errorLabel.text = "ERROR"
+        
         passwordTwoTF?.addTarget(self, action: #selector(setDisableButton), for: .editingChanged)
+        passwordOneTF?.addTarget(self, action: #selector(validatePassword), for: .editingChanged)
     }
     
     
@@ -47,10 +49,19 @@ class CreatePasswordViewController: UIViewController {
             errorLabel.text = ""
             return true
         } else {
-            errorLabel.text = "ERROR"
+            errorLabel.text = "Repeat the previous password"
             return false
         }
         
+    }
+    
+    @objc func validatePassword(){
+        if (passwordOneTF.text!.count >= 8 && passwordOneTF.text!.count != 0){
+            errorLabel2.text = ""
+        } else {
+            createButton.isEnabled = false
+            errorLabel2.text = "Enter a password with at least 8 characters"
+        }
     }
     
     
