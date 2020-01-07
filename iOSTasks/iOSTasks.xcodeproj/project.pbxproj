@@ -18,6 +18,8 @@
 		7A4E86A623A2473300CA3612 /* AddItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E86A523A2473300CA3612 /* AddItemViewController.swift */; };
 		7A4E86A823A2524700CA3612 /* ReminderEntityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */; };
 		7A57AC7423A6458A00BFCDA3 /* ReminderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A57AC7323A6458A00BFCDA3 /* ReminderTableViewController.swift */; };
+		7A6E0ADE23C4777E005D04C8 /* CreatePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E0ADD23C4777E005D04C8 /* CreatePasswordViewController.swift */; };
+		7A6E0AE023C477BF005D04C8 /* CheckPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6E0ADF23C477BF005D04C8 /* CheckPasswordViewController.swift */; };
 		7A72F92223A8D75500890B0F /* ModifyItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A72F92123A8D75500890B0F /* ModifyItemViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		7A4E86A523A2473300CA3612 /* AddItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemViewController.swift; sourceTree = "<group>"; };
 		7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderEntityClass.swift; sourceTree = "<group>"; };
 		7A57AC7323A6458A00BFCDA3 /* ReminderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderTableViewController.swift; sourceTree = "<group>"; };
+		7A6E0ADD23C4777E005D04C8 /* CreatePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePasswordViewController.swift; sourceTree = "<group>"; };
+		7A6E0ADF23C477BF005D04C8 /* CheckPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckPasswordViewController.swift; sourceTree = "<group>"; };
 		7A72F92123A8D75500890B0F /* ModifyItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyItemViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +85,8 @@
 				7A4E86A723A2524700CA3612 /* ReminderEntityClass.swift */,
 				7A57AC7323A6458A00BFCDA3 /* ReminderTableViewController.swift */,
 				7A72F92123A8D75500890B0F /* ModifyItemViewController.swift */,
+				7A6E0ADD23C4777E005D04C8 /* CreatePasswordViewController.swift */,
+				7A6E0ADF23C477BF005D04C8 /* CheckPasswordViewController.swift */,
 			);
 			path = iOSTasks;
 			sourceTree = "<group>";
@@ -165,6 +171,8 @@
 				7A4E868D23A23D9E00CA3612 /* AppDelegate.swift in Sources */,
 				7A4E868F23A23D9E00CA3612 /* SceneDelegate.swift in Sources */,
 				7A4E86A623A2473300CA3612 /* AddItemViewController.swift in Sources */,
+				7A6E0AE023C477BF005D04C8 /* CheckPasswordViewController.swift in Sources */,
+				7A6E0ADE23C4777E005D04C8 /* CreatePasswordViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

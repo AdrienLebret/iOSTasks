@@ -114,7 +114,8 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
     }
     
     @IBOutlet weak var titleR: UITextField!
-    @IBOutlet weak var commentR: UITextField!
+    //@IBOutlet weak var commentR: UITextField!
+    @IBOutlet weak var commentR2: UITextField!
     @IBOutlet weak var errorTitleLabelR: UILabel!
     @IBOutlet weak var errorDateLabelR: UILabel!
     @IBOutlet weak var addButtonR: UIButton!
@@ -134,7 +135,7 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             // Normally it's valid when the user press the button
 
             
-            let reminder:ReminderEntityClass = ReminderEntityClass(cat: typeChoosen, com: "Commentaire", dea: datePicker!.date, rat: priorityChoosen, tit: titleR.text!)
+            let reminder:ReminderEntityClass = ReminderEntityClass(cat: typeChoosen, com: commentR2.text!, dea: datePicker!.date, rat: priorityChoosen, tit: titleR.text!)
             
             createData(reminderEntity: reminder)
             createNotification(reminderEntity: reminder)
