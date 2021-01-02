@@ -16,6 +16,9 @@ class CheckPasswordViewController: UIViewController {
     @IBOutlet weak var passwordEditTF: UITextField!
     @IBOutlet weak var errorPassword: UILabel!
     
+    @IBOutlet weak var okButton: UIButton!
+    @IBOutlet weak var createButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,9 +31,11 @@ class CheckPasswordViewController: UIViewController {
         passwordEditTF.isSecureTextEntry = true
         
         if created {
-            // Password Not Created
-            print("HELLO")
-            //performSegue(withIdentifier: "showCreatedPassword", sender: self)
+            createButton.isHidden = true
+        } else {
+            errorPassword.text! = "No password, create one"
+            okButton.isHidden = true
+            passwordEditTF.isHidden = true
         }
         
     }

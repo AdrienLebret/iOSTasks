@@ -141,8 +141,8 @@ class AddItemViewController: UIViewController, UIPickerViewDataSource, UIPickerV
             createNotification(reminderEntity: reminder)
             
             //createValidateAlert(title: "New task added", message: titleR!.text!)
-            
-            //self.show(tabBarController!, sender: self)
+//            saveDone
+            //self.performSegue(withIdentifier: "save", sender: self)
         }
         
     }
